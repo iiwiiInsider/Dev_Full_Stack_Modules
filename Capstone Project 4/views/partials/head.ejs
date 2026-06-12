@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title %></title>
+  <meta name="color-scheme" content="light dark">
+  <link rel="preconnect" href="https://graph.microsoft.com">
+  <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+<header class="site-header">
+  <a class="logo" href="/">Moodboard</a>
+  <nav class="nav">
+    <a href="/" class="nav-link">Home</a>
+    <% if (authed) { %>
+    <a href="/logout" class="nav-link">Logout</a>
+    <% } else { %>
+    <a href="/login" class="nav-link btn">Sign in with Microsoft</a>
+    <% } %>
+  </nav>
+</header>
+<main class="container">

@@ -1,0 +1,24 @@
+{
+  "name": "rentals-mandate-creator",
+  "version": "1.0.0",
+  "description": "Web app to generate professional property rental mandate PDFs",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "sample": "node test/generateSample.js"
+  },
+  "keywords": ["pdf", "property", "mandate", "real-estate", "rental"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.2",
+    "pdfkit": "^0.15.0",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4",
+    "node-fetch": "^3.3.2"
+  }
+}

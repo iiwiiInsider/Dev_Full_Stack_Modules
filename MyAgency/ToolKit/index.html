@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>MyAgency ToolKit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Orbitron:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css" />
+  <script defer src="./script.js"></script>
+</head>
+<body>
+  <header class="tk-header" role="banner">
+    <div class="title" aria-label="MyAgency ToolKit">
+      <div class="logo" aria-hidden="true">⟡</div>
+      <div>
+        <h1>MyAgency ToolKit</h1>
+        <p class="sub">All creators in one place</p>
+      </div>
+    </div>
+    <div class="actions" role="toolbar" aria-label="ToolKit actions">
+      <button id="open-all" class="btn btn-secondary" title="Open all online apps in new tabs">Open all</button>
+      <button id="recheck" class="btn" title="Re-check service status">Re-check</button>
+      <button id="theme-toggle" class="btn btn-ghost" title="Toggle theme" aria-pressed="false">🌙</button>
+    </div>
+  </header>
+
+  <main class="tk-main">
+    <section class="cards" id="cards" aria-live="polite"></section>
+    <aside class="panel" aria-label="Preview panel">
+      <div class="panel-header">
+        <div>
+          <h2 id="panel-title">Preview</h2>
+          <p class="muted" id="panel-url"></p>
+        </div>
+        <div class="panel-actions">
+          <button id="open-new" class="btn btn-secondary" disabled>Open in new tab</button>
+          <button id="close-panel" class="btn btn-ghost" title="Close preview">✖</button>
+        </div>
+      </div>
+      <div class="iframe-wrap">
+        <iframe id="preview" title="App preview" sandbox="allow-scripts allow-forms allow-same-origin" src="about:blank"></iframe>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="tk-footer">
+    <small>
+      Tip: Override a service URL with the ✏️ button on each card. Your changes are saved in the browser.
+    </small>
+  </footer>
+</body>
+</html>

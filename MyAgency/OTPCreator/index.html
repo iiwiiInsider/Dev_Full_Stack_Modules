@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Offer To Purchase Creator</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script defer src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+  <!-- Load main app as ES module (it imports template.js) -->
+  <script type="module" src="script.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Offer To Purchase Creator</h1>
+    <p class="tagline">Create a draft Offer to Purchase (Not Legal Advice)</p>
+  </header>
+  <main>
+    <form id="otp-form">
+      <section>
+        <h2>Property Details</h2>
+        <div class="grid">
+          <label>Property Address*<input required name="propertyAddress" placeholder="123 Main St, City, ST" /></label>
+          <label>Legal Description<textarea name="legalDescription" rows="2" placeholder="From deed or title report"></textarea></label>
+          <label>Parcel / Tax ID<input name="parcelId" /></label>
+        </div>
+      </section>
+
+      <section>
+        <h2>Parties</h2>
+        <div class="grid parties">
+          <label>Buyer Name(s)*<textarea required name="buyers" rows="2" placeholder="Buyer One; Buyer Two"></textarea></label>
+          <label>Seller Name(s)*<textarea required name="sellers" rows="2" placeholder="Seller One; Seller Two"></textarea></label>
+          <label>Buyer Agent / Broker<input name="buyerBroker" /></label>
+          <label>Seller Agent / Broker<input name="sellerBroker" /></label>
+        </div>
+      </section>
+
+      <section>
+        <h2>Price & Funding</h2>
+        <div class="grid price">
+          <label>Purchase Price (ZAR)*<input required name="purchasePrice" type="number" min="0" step="0.01" /></label>
+          <label>Earnest Money Deposit (ZAR)*<input required name="earnestMoney" type="number" min="0" step="0.01" /></label>
+          <label>EM Held By<input name="earnestHolder" placeholder="Title Co / Broker Trust" /></label>
+          <label>Financing Type*
+            <select required name="financingType">
+              <option value="Cash">Cash</option>
+              <option value="Conventional" selected>Conventional</option>
+              <option value="FHA">FHA</option>
+              <option value="VA">VA</option>
+              <option value="USDA">USDA</option>
+              <option value="Seller Financing">Seller Financing</option>
+              <option value="Other">Other</option>
+            </select>
+          </label>
+          <label>Financing Details<textarea name="financingDetails" rows="2" placeholder="Down payment %, lender, rate if known"></textarea></label>
+        </div>
+      </section>
+
+      <section>
+        <h2>Dates</h2>
+        <div class="grid dates">
+          <label>Offer Date*<input required name="offerDate" type="date" /></label>
+          <label>Acceptance Deadline*<input required name="acceptanceDeadline" type="datetime-local" /></label>
+          <label>Proposed Closing Date*<input required name="closingDate" type="date" /></label>
+          <label>Possession Date<input name="possessionDate" type="date" /></label>
+        </div>
+      </section>
+
+      <section>
+        <h2>Included / Excluded Items</h2>
+        <div class="grid items">
+          <label>Included Items<textarea name="included" rows="2" placeholder="e.g. Refrigerator, Washer/Dryer, Window Treatments"></textarea></label>
+          <label>Excluded Items<textarea name="excluded" rows="2" placeholder="Items seller keeps"></textarea></label>
+        </div>
+      </section>
+
+      <section>
+        <h2>Contingencies</h2>
+        <div id="contingencies-list"></div>
+        <div class="add-row">
+          <select id="contingency-type">
+            <option value="Inspection">Inspection</option>
+            <option value="Financing">Financing</option>
+            <option value="Appraisal">Appraisal</option>
+            <option value="Sale of Buyer's Property">Sale of Buyer's Property</option>
+            <option value="Title Review">Title Review</option>
+            <option value="Other">Other</option>
+          </select>
+          <input id="contingency-days" type="number" min="0" placeholder="Days" />
+          <input id="contingency-notes" placeholder="Notes" />
+          <button type="button" id="add-contingency">Add</button>
+        </div>
+      </section>
+
+      <section>
+        <h2>Additional Terms</h2>
+        <textarea name="additionalTerms" rows="4" placeholder="Any special provisions, credits, repair limits, etc."></textarea>
+      </section>
+
+      <section>
+        <h2>Signatures (Placeholders)</h2>
+        <div class="grid signatures">
+          <label>Buyer Signature Lines<textarea name="buyerSignatureLines" rows="2" placeholder="__________________ Buyer One\n__________________ Buyer Two"></textarea></label>
+          <label>Seller Signature Lines<textarea name="sellerSignatureLines" rows="2" placeholder="__________________ Seller One\n__________________ Seller Two"></textarea></label>
+        </div>
+      </section>
+
+      <section>
+        <h2>Actions</h2>
+        <div class="actions">
+          <button type="submit">Generate PDF</button>
+          <button type="button" id="preview-html">Preview</button>
+          <button type="button" id="save-draft">Save Draft</button>
+          <button type="button" id="load-draft">Load Draft</button>
+          <button type="reset" class="secondary">Reset</button>
+        </div>
+      </section>
+    </form>
+
+    <dialog id="preview-dialog">
+      <article id="preview-content"></article>
+      <menu>
+        <button id="close-preview">Close</button>
+        <button id="print-preview">Print</button>
+      </menu>
+    </dialog>
+  </main>
+  <footer>
+    <p class="small">Generated document is a draft template and not legal advice. Consult a licensed professional before relying on it.</p>
+  </footer>
+</body>
+</html>

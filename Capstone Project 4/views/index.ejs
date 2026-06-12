@@ -1,0 +1,40 @@
+<%- include('partials/head', { title, authed }) %>
+<section class="hero">
+  <div class="hero-inner">
+    <h1>OneDrive Moodboard</h1>
+    <p>Sign in, pick a OneDrive folder, and enjoy a responsive, animated mosaic of your photos.</p>
+    <% if (!authed) { %>
+    <a class="cta" href="/login">Connect OneDrive</a>
+    <% } %>
+    <% if (authed) { %>
+    <div class="hero-actions">
+      <img id="avatar" class="avatar" alt="user" hidden>
+      <button id="shuffle" class="btn">Shuffle</button>
+      <button id="clear" class="btn">Clear</button>
+      <label class="slider">
+        Density <input id="density" type="range" min="30" max="120" value="60">
+      </label>
+    </div>
+    <% } %>
+  </div>
+</section>
+
+<% if (authed) { %>
+<section class="panels">
+  <div class="panel">
+    <h2>Your Folders (Root)</h2>
+    <div id="root-list" class="list"></div>
+  </div>
+  <div class="panel">
+    <h2>Pictures</h2>
+    <div id="pics-list" class="list"></div>
+  </div>
+</section>
+
+<section>
+  <h2>Selected Moodboard</h2>
+  <div id="moodboard" class="moodboard"></div>
+</section>
+<% } %>
+
+<%- include('partials/foot') %>

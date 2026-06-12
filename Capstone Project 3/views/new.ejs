@@ -1,0 +1,23 @@
+<section class="compose reveal">
+  <h1>New Post</h1>
+  <form action="/posts" method="POST" class="form">
+    <div class="form-field">
+      <label for="title">Title</label>
+      <input id="title" name="title" type="text" value="<%= typeof title !== 'undefined' ? title : '' %>" required maxlength="120" />
+      <div class="help small muted"><span data-count-for="title">0</span>/120</div>
+    </div>
+    <div class="form-field">
+      <label for="body">Body</label>
+      <textarea id="body" name="body" rows="10" required><%= typeof body !== 'undefined' ? body : '' %></textarea>
+      <div class="help small muted"><span data-count-for="body">0</span> chars</div>
+    </div>
+    <div class="form-field">
+      <label for="tags">Tags <span class="muted small">(comma or space separated)</span></label>
+      <input id="tags" name="tags" type="text" value="<%= typeof tags !== 'undefined' ? tags : '' %>" placeholder="e.g. javascript, express, ejs" />
+    </div>
+    <div class="form-actions">
+      <a class="btn" href="/">Cancel</a>
+      <button class="btn primary" type="submit">Publish</button>
+    </div>
+  </form>
+</section>

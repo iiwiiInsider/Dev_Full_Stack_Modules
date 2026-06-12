@@ -1,0 +1,29 @@
+{
+  "name": "8.3-travel-tracker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js",
+    "dev:1": "nodemon solution1.js",
+    "dev:2": "nodemon solution2.js",
+    "dev:3": "nodemon solution3.js",
+    "dev:4": "nodemon solution4.js",
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+  "ejs": "^3.1.9",
+  "dotenv": "^16.4.5",
+    "express": "^4.18.2",
+    "pg": "^8.16.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}

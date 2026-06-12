@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Property Rental Mandate Generator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --primary:#0A6EB4; --bg:#f5f7fa; --card:#fff; --border:#d9e2ec; --radius:12px; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: 'Inter', system-ui, Arial, sans-serif; background:var(--bg); color:#1f2933; }
+    header { padding:1.5rem 2rem; background:linear-gradient(90deg,var(--primary),#094a7a); color:#fff; }
+    header h1 { margin:0; font-size:1.5rem; letter-spacing:.5px; }
+    main { max-width:1150px; margin:1.5rem auto 3rem; padding:0 1.5rem; }
+    .grid { display:grid; gap:1.25rem; grid-template-columns: repeat(auto-fit,minmax(320px,1fr)); }
+    form { display:grid; gap:1.5rem; }
+    fieldset { border:1px solid var(--border); padding:1.25rem 1.25rem 1rem; border-radius:var(--radius); background:var(--card); box-shadow:0 2px 4px rgba(0,0,0,.04); }
+    legend { padding:0 .5rem; font-weight:600; color:var(--primary); }
+    label { display:flex; flex-direction:column; font-size:.75rem; font-weight:500; text-transform:uppercase; letter-spacing:.5px; gap:.35rem; color:#52606d; }
+    input, textarea, select { width:100%; padding:.65rem .75rem; border:1px solid var(--border); border-radius:8px; font:inherit; background:#fff; resize:vertical; }
+    input:focus, textarea:focus, select:focus { outline:2px solid var(--primary); border-color:var(--primary); }
+    .two-col { display:grid; gap:.75rem; grid-template-columns: repeat(auto-fit,minmax(140px,1fr)); }
+    button { background:var(--primary); color:#fff; padding:.9rem 1.4rem; border:none; border-radius:10px; font-size:1rem; font-weight:600; cursor:pointer; box-shadow:0 4px 12px -2px rgba(10,110,180,.4); transition:.25s; }
+    button:hover { transform:translateY(-1px); box-shadow:0 6px 16px -3px rgba(10,110,180,.5); }
+    button:active { transform:translateY(0); }
+    .actions { display:flex; gap:1rem; flex-wrap:wrap; justify-content:flex-end; }
+    .status { font-size:.85rem; color:#52606d; }
+    .badge { background:#e0f2fe; color:#0369a1; padding:.35rem .55rem; border-radius:6px; font-size:.65rem; font-weight:600; letter-spacing:.5px; }
+    footer { text-align:center; padding:2rem 1rem 3rem; font-size:.75rem; color:#829ab1; }
+  </style>
+  </head>
+  <body>
+    <header>
+      <h1>Property Rental Mandate Generator</h1>
+    </header>
+    <main>
+      <form id="mandateForm">
+        <div class="grid">
+          <fieldset>
+            <legend>Property</legend>
+            <label>Address<input name="property.address" required placeholder="123 Main St, City" /></label>
+            <div class="two-col">
+              <label>Type<input name="property.type" required placeholder="Apartment / House" /></label>
+              <label>Bedrooms<input name="property.bedrooms" type="number" min="0" /></label>
+            </div>
+            <div class="two-col">
+              <label>Bathrooms<input name="property.bathrooms" type="number" min="0" /></label>
+              <label>Furnished<select name="property.furnished"><option value="">-- Select --</option><option>true</option><option>false</option></select></label>
+            </div>
+            <div class="two-col">
+              <label>Parking<input name="property.parking" placeholder="1 Garage / Street / None" /></label>
+              <label>Building Size (m²)<input name="property.buildingSize" type="number" min="0" /></label>
+            </div>
+            <label>Description<textarea name="property.description" rows="4" placeholder="Short marketing description..."></textarea></label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Landlord</legend>
+            <label>Name<input name="landlord.name" required /></label>
+            <label>ID / Passport<input name="landlord.idNumber" /></label>
+            <div class="two-col">
+              <label>Email<input name="landlord.email" type="email" /></label>
+              <label>Phone<input name="landlord.phone" type="tel" /></label>
+            </div>
+            <label>Address<textarea name="landlord.address" rows="3"></textarea></label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Agent</legend>
+            <label>Name<input name="agent.name" required /></label>
+            <label>License #<input name="agent.license" /></label>
+            <div class="two-col">
+              <label>Email<input name="agent.email" type="email" /></label>
+              <label>Phone<input name="agent.phone" type="tel" /></label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Agency</legend>
+            <label>Name<input name="agency.name" required /></label>
+            <label>Registration #<input name="agency.registration" /></label>
+            <label>Tagline<input name="agency.tagline" placeholder="Professional Letting Services" /></label>
+            <label>Address<textarea name="agency.address" rows="3"></textarea></label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Rental</legend>
+            <div class="two-col">
+              <label>Monthly Rent (ZAR)<input name="rental.monthlyRent" type="number" min="0" step="0.01" required /></label>
+              <label>Deposit (ZAR)<input name="rental.deposit" type="number" min="0" step="0.01" /></label>
+            </div>
+            <div class="two-col">
+              <label>Lease Term (months)<input name="rental.leaseTermMonths" type="number" min="1" /></label>
+              <label>Available From<input name="rental.availableFrom" type="date" /></label>
+            </div>
+            <div class="two-col">
+              <label>Utilities Included<input name="rental.utilitiesIncluded" placeholder="Water, WiFi; electricity prepaid" /></label>
+              <label>Pets Allowed<select name="rental.petsAllowed"><option value="">-- Select --</option><option>Yes</option><option>No</option><option>By arrangement</option></select></label>
+            </div>
+            <label>Max Occupants<input name="rental.maxOccupants" type="number" min="1" /></label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Mandate Terms</legend>
+            <div class="two-col">
+              <label>Start Date<input name="terms.startDate" type="date" /></label>
+              <label>End Date<input name="terms.endDate" type="date" /></label>
+            </div>
+            <label>Exclusivity<select name="terms.exclusivity"><option value="">-- Select --</option><option>Exclusive</option><option>Open</option><option>Sole</option></select></label>
+            <div class="two-col">
+              <label>Commission %<input name="terms.commissionRate" type="number" min="0" step="0.1" /></label>
+              <label>Minimum Commission (ZAR)<input name="terms.minimumCommission" type="number" min="0" step="0.01" /></label>
+            </div>
+            <div class="two-col">
+              <label>Placement Fee (ZAR)<input name="terms.placementFee" type="number" min="0" step="0.01" /></label>
+              <label>Management Fee %<input name="terms.managementFeeRate" type="number" min="0" step="0.1" /></label>
+            </div>
+            <label>Marketing Plan<textarea name="terms.marketingPlan" rows="3" placeholder="Online listings, professional photos, tenant screening..."></textarea></label>
+            <label>Special Conditions<textarea name="terms.specialConditions" rows="3"></textarea></label>
+          </fieldset>
+        </div>
+        <div class="actions">
+          <span id="status" class="status"></span>
+          <button type="submit">Generate PDF Mandate</button>
+        </div>
+      </form>
+      <footer>
+        <div>Generated mandates are not a substitute for legal advice. Review with a qualified professional.</div>
+      </footer>
+    </main>
+    <script>
+      const form = document.getElementById('mandateForm');
+      const apiBase = (location.origin && location.origin.startsWith('http')) ? location.origin : 'http://localhost:3001';
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const statusEl = document.getElementById('status');
+        statusEl.textContent = 'Generating PDF...';
+        const submitBtn = form.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        const formData = new FormData(form);
+        const data = {};
+        for (const [k,v] of formData.entries()) {
+          if (!v) continue;
+          const path = k.split('.');
+          let cursor = data;
+          path.forEach((p,i)=>{
+            if (i === path.length-1) { cursor[p] = v; } else { cursor[p] = cursor[p] || {}; cursor = cursor[p]; }
+          });
+        }
+        try {
+          const res = await fetch(`${apiBase}/api/rental-mandate`, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data)});
+          if (!res.ok) {
+            let msg = `Request failed (${res.status})`;
+            try { const j = await res.json(); if (j?.error) msg = j.error; } catch {}
+            throw new Error(msg);
+          }
+          const blob = await res.blob();
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'rental-mandate.pdf';
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          window.URL.revokeObjectURL(url);
+          statusEl.textContent = 'PDF downloaded.';
+        } catch (err) {
+          console.error(err);
+          if (err?.message?.includes('Failed to fetch')) {
+            statusEl.textContent = 'Cannot reach server. Please ensure the app is running on http://localhost:3001.';
+          } else {
+            statusEl.textContent = `Failed to generate: ${err.message}`;
+          }
+        } finally {
+          submitBtn.disabled = false;
+        }
+      });
+    </script>
+  </body>
+  </html>

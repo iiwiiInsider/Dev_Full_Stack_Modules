@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Day Advice</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; margin: 2rem; line-height: 1.5; }
+    .wrap { max-width: 720px; margin: 0 auto; }
+    .tag { display: inline-block; padding: 0.25rem 0.5rem; border-radius: 999px; font-size: 0.9rem; background: #eef; color: #223; }
+    @media (prefers-color-scheme: dark){ .tag{ background:#223; color:#eef; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>It's <%= dayName %></h1>
+    <p class="tag"><%= isWeekend ? "It's the weekend 🎉" : "It's a weekday 💼" %></p>
+    <p style="margin-top: 1rem; font-size: 1.2rem;">Advice: <strong><%= advice %></strong></p>
+  </div>
+</body>
+</html>

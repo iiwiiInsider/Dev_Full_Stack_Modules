@@ -1,0 +1,7 @@
+{
+  "watch": ["app.js", "views", "public"],
+  "ext": "js json ejs css",
+  "env": {
+    "PORT": "3001"
+  }
+}

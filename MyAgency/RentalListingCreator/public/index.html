@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Rental Listing PDF Generator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --primary:#16a34a; --bg:#f6f9f7; --card:#fff; --border:#d1e7dd; --radius:12px; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: 'Inter', system-ui, Arial, sans-serif; background:var(--bg); color:#1f2933; }
+    header { padding:1.5rem 2rem; background:linear-gradient(90deg,var(--primary),#166534); color:#fff; }
+    header h1 { margin:0; font-size:1.5rem; letter-spacing:.5px; }
+    main { max-width:1150px; margin:1.5rem auto 3rem; padding:0 1.5rem; }
+    .grid { display:grid; gap:1.25rem; grid-template-columns: repeat(auto-fit,minmax(320px,1fr)); }
+    form { display:grid; gap:1.5rem; }
+    fieldset { border:1px solid var(--border); padding:1.25rem 1.25rem 1rem; border-radius:var(--radius); background:var(--card); box-shadow:0 2px 4px rgba(0,0,0,.04); }
+    legend { padding:0 .5rem; font-weight:600; color:#166534; }
+    label { display:flex; flex-direction:column; font-size:.75rem; font-weight:500; text-transform:uppercase; letter-spacing:.5px; gap:.35rem; color:#52606d; }
+    input, textarea, select { width:100%; padding:.65rem .75rem; border:1px solid var(--border); border-radius:8px; font:inherit; background:#fff; resize:vertical; }
+    input:focus, textarea:focus, select:focus { outline:2px solid var(--primary); border-color:var(--primary); }
+    .two-col { display:grid; gap:.75rem; grid-template-columns: repeat(auto-fit,minmax(140px,1fr)); }
+    .actions { display:flex; gap:1rem; flex-wrap:wrap; justify-content:flex-end; }
+    button { background:var(--primary); color:#fff; padding:.9rem 1.4rem; border:none; border-radius:10px; font-size:1rem; font-weight:600; cursor:pointer; box-shadow:0 4px 12px -2px rgba(22,163,74,.35); transition:.25s; }
+    button:hover { transform:translateY(-1px); box-shadow:0 6px 16px -3px rgba(22,163,74,.45); }
+    button:active { transform:translateY(0); }
+    .status { font-size:.85rem; color:#52606d; }
+    footer { text-align:center; padding:2rem 1rem 3rem; font-size:.75rem; color:#829ab1; }
+    .feature-tags { display:flex; flex-wrap:wrap; gap:.5rem; margin-top:.5rem; }
+    .feature-tags span { background:#dcfce7; color:#14532d; padding:.4rem .6rem; border-radius:20px; font-size:.65rem; font-weight:600; cursor:pointer; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Rental Listing PDF Generator</h1>
+  </header>
+  <main>
+    <form id="rentalForm">
+      <div class="grid">
+        <fieldset>
+          <legend>Property</legend>
+          <label>Address<input name="property.address" required placeholder="123 Main St, City" /></label>
+          <div class="two-col">
+            <label>Type<input name="property.type" required placeholder="Apartment / House" /></label>
+            <label>Floor/Unit<input name="property.unit" placeholder="Unit 5B / Floor 2" /></label>
+          </div>
+          <div class="two-col">
+            <label>Bedrooms<input name="property.bedrooms" type="number" min="0" /></label>
+            <label>Bathrooms<input name="property.bathrooms" type="number" min="0" /></label>
+          </div>
+          <div class="two-col">
+            <label>Land Size (m²)<input name="property.landSize" type="number" min="0" /></label>
+            <label>Building Size (m²)<input name="property.buildingSize" type="number" min="0" /></label>
+          </div>
+          <label>Parking<input name="property.parking" placeholder="1 Covered Bay / Street" /></label>
+          <label>Description<textarea name="property.description" rows="4" placeholder="Highlight the best aspects for tenants..."></textarea></label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Rental Terms</legend>
+          <div class="two-col">
+            <label>Monthly Rent (ZAR)<input name="rental.monthlyRent" required type="number" min="0" step="0.01" placeholder="9500" /></label>
+            <label>Deposit (ZAR)<input name="rental.deposit" required type="number" min="0" step="0.01" placeholder="9500" /></label>
+          </div>
+          <div class="two-col">
+            <label>Lease Term (months)<input name="rental.leaseTerm" type="number" min="1" step="1" placeholder="12" /></label>
+            <label>Available From<input name="rental.availableFrom" type="date" /></label>
+          </div>
+          <label>Utilities<textarea name="rental.utilities" rows="2" placeholder="Water included, electricity prepaid..."></textarea></label>
+          <label>Included<textarea name="rental.included" rows="2" placeholder="Appliances, parking bay, Wi‑Fi..."></textarea></label>
+          <div class="two-col">
+            <label>Application Fee (ZAR)<input name="rental.applicationFee" type="number" min="0" step="0.01" /></label>
+            <label>Pets Allowed<select name="rental.petsAllowed">
+              <option value="">Select</option>
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </select></label>
+          </div>
+          <label>Pets Policy<textarea name="rental.petsPolicy" rows="2" placeholder="Small pets on approval; additional deposit applies"></textarea></label>
+          <label>Smoking Policy<textarea name="rental.smokingPolicy" rows="2" placeholder="No smoking inside the property"></textarea></label>
+          <label>Additional Notes<textarea name="rental.notes" rows="3" placeholder="Application requirements, screening, etc."></textarea></label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Images</legend>
+          <label>Hero Image (main)
+            <input type="file" id="heroImage" accept="image/*" />
+          </label>
+          <label>Gallery Images (up to 12)
+            <input type="file" id="galleryImages" accept="image/*" multiple />
+          </label>
+          <div id="imagePreview" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:.5rem;"></div>
+          <small style="color:#52606d;font-size:.65rem;">Images are embedded into the PDF (resized). Large images are compressed by the browser when converted.</small>
+        </fieldset>
+
+        <fieldset>
+          <legend>Features</legend>
+          <label>Add Feature
+            <div style="display:flex; gap:.5rem;">
+              <input id="featureInput" placeholder="e.g. In-unit Laundry" />
+              <button type="button" id="addFeature" style="flex:0 0 auto;">Add</button>
+            </div>
+          </label>
+          <div id="featureTags" class="feature-tags"></div>
+          <input type="hidden" name="features" id="featuresField" />
+        </fieldset>
+
+        <fieldset>
+          <legend>Agent</legend>
+          <label>Name<input name="agent.name" required /></label>
+          <div class="two-col">
+            <label>Email<input name="agent.email" type="email" /></label>
+            <label>Phone<input name="agent.phone" type="tel" /></label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Agency</legend>
+          <label>Name<input name="agency.name" required /></label>
+          <label>Registration #<input name="agency.registration" /></label>
+          <label>Tagline<input name="agency.tagline" placeholder="Professional Letting Services" /></label>
+          <label>Address<textarea name="agency.address" rows="3"></textarea></label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Extras</legend>
+          <label>Disclaimer<textarea name="disclaimer" rows="3" placeholder="Custom disclaimer text..."></textarea></label>
+        </fieldset>
+      </div>
+      <div class="actions">
+        <span id="status" class="status"></span>
+        <button type="submit">Generate Rental PDF</button>
+      </div>
+    </form>
+    <footer>
+      <div>Rental brochures are marketing materials only and not a substitute for the lease agreement or legally required disclosures.</div>
+    </footer>
+  </main>
+  <script>
+    const featureInput = document.getElementById('featureInput');
+    const addFeatureBtn = document.getElementById('addFeature');
+    const featureTags = document.getElementById('featureTags');
+    const featuresField = document.getElementById('featuresField');
+    const features = [];
+
+    function renderFeatures(){
+      featureTags.innerHTML='';
+      features.forEach((f,i)=>{
+        const span = document.createElement('span');
+        span.textContent = f + ' \u2715';
+        span.title = 'Remove';
+        span.onclick = () => { features.splice(i,1); updateField(); renderFeatures(); };
+        featureTags.appendChild(span);
+      });
+    }
+    function updateField(){
+      featuresField.value = JSON.stringify(features);
+    }
+    addFeatureBtn.addEventListener('click',()=>{
+      const v = featureInput.value.trim();
+      if(!v) return;
+      features.push(v); featureInput.value=''; updateField(); renderFeatures();
+    });
+
+    const heroInput = document.getElementById('heroImage');
+    const galleryInput = document.getElementById('galleryImages');
+    const imagePreview = document.getElementById('imagePreview');
+
+    let heroDataUrl = null;
+    let galleryDataUrls = [];
+
+    async function fileToDataUrl(file, maxWidth = 1600) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          const img = new Image();
+            img.onload = () => {
+              const scale = Math.min(1, maxWidth / img.width);
+              const canvas = document.createElement('canvas');
+              canvas.width = img.width * scale;
+              canvas.height = img.height * scale;
+              const ctx = canvas.getContext('2d');
+              ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+              resolve(canvas.toDataURL('image/jpeg', 0.82));
+            };
+            img.onerror = reject;
+            img.src = reader.result;
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    heroInput?.addEventListener('change', async () => {
+      const f = heroInput.files[0];
+      if (!f) { heroDataUrl = null; return; }
+      heroDataUrl = await fileToDataUrl(f);
+      renderImagePreview();
+    });
+    galleryInput?.addEventListener('change', async () => {
+      const files = Array.from(galleryInput.files).slice(0,12);
+      galleryDataUrls = await Promise.all(files.map(f => fileToDataUrl(f)));
+      renderImagePreview();
+    });
+
+    function renderImagePreview(){
+      imagePreview.innerHTML='';
+      if (heroDataUrl) {
+        const img = document.createElement('img');
+        img.src = heroDataUrl; img.style.width='90px'; img.style.border='2px solid #16a34a'; img.title='Hero';
+        imagePreview.appendChild(img);
+      }
+      galleryDataUrls.forEach(u => { const img=document.createElement('img'); img.src=u; img.style.width='70px'; img.style.opacity='.9'; imagePreview.appendChild(img); });
+    }
+
+    const form = document.getElementById('rentalForm');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const statusEl = document.getElementById('status');
+      statusEl.textContent = 'Generating PDF...';
+      const formData = new FormData(form);
+      const data = {};
+      for (const [k,v] of formData.entries()) {
+        if (!v) continue;
+        if (k === 'features') continue; // handle after
+        const path = k.split('.');
+        let cursor = data;
+        path.forEach((p,i)=>{
+          if (i === path.length-1) { cursor[p] = v; } else { cursor[p] = cursor[p] || {}; cursor = cursor[p]; }
+        });
+      }
+      if (features.length) data.features = [...features];
+      if (heroDataUrl) data.images = { hero: heroDataUrl, gallery: galleryDataUrls };
+      try {
+        const res = await fetch('/api/rental', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data)});
+        if (!res.ok) throw new Error('Server error');
+        const blob = await res.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'rental-listing.pdf';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        window.URL.revokeObjectURL(url);
+        statusEl.textContent = 'PDF downloaded.';
+      } catch (err) {
+        console.error(err);
+        statusEl.textContent = 'Failed to generate. Check required fields.';
+      }
+    });
+  </script>
+</body>
+</html>

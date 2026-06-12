@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tenant Credit Check (Non‑FCRA)</title>
+    <meta name="description" content="Simple, client‑side tenant credit check score and printable report for landlords." />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <h1>Tenant Credit Check</h1>
+        <p class="subtitle">Quick screening score and printable report for landlords (informational only, not a credit report).</p>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="card" aria-labelledby="form-title">
+        <h2 id="form-title">Applicant Information</h2>
+
+        <form id="credit-form" novalidate>
+          <div class="grid two">
+            <div class="field">
+              <label for="fullName">Full name <span aria-hidden="true">*</span></label>
+              <input id="fullName" name="fullName" type="text" required maxlength="120" />
+            </div>
+            <div class="field">
+              <label for="email">Email <span aria-hidden="true">*</span></label>
+              <input id="email" name="email" type="email" required />
+            </div>
+            <div class="field">
+              <label for="phone">Phone <span aria-hidden="true">*</span></label>
+              <input id="phone" name="phone" type="tel" required pattern="[+0-9()\-\s]{7,}" />
+            </div>
+            <div class="field">
+              <label for="dob">Date of birth</label>
+              <input id="dob" name="dob" type="date" />
+            </div>
+            <div class="field full">
+              <label for="address">Current address</label>
+              <input id="address" name="address" type="text" maxlength="160" />
+            </div>
+            <div class="field">
+              <label for="city">City</label>
+              <input id="city" name="city" type="text" maxlength="80" />
+            </div>
+            <div class="field">
+              <label for="state">State/Province</label>
+              <input id="state" name="state" type="text" maxlength="40" />
+            </div>
+            <div class="field">
+              <label for="zip">ZIP/Postal code</label>
+              <input id="zip" name="zip" type="text" maxlength="16" />
+            </div>
+          </div>
+
+          <h3>Financials (ZAR)</h3>
+          <div class="grid three">
+            <div class="field">
+              <label for="monthlyIncome">Monthly income (gross) – ZAR <span aria-hidden="true">*</span></label>
+              <input id="monthlyIncome" name="monthlyIncome" type="number" min="0" step="0.01" required />
+            </div>
+            <div class="field">
+              <label for="monthlyRent">Target monthly rent – ZAR <span aria-hidden="true">*</span></label>
+              <input id="monthlyRent" name="monthlyRent" type="number" min="0" step="0.01" required />
+            </div>
+            <div class="field">
+              <label for="monthlyDebt">Monthly debt payments – ZAR</label>
+              <input id="monthlyDebt" name="monthlyDebt" type="number" min="0" step="0.01" value="0" />
+            </div>
+          </div>
+
+          <h3>Employment</h3>
+          <div class="grid three">
+            <div class="field">
+              <label for="employmentStatus">Status</label>
+              <select id="employmentStatus" name="employmentStatus">
+                <option value="employed">Employed</option>
+                <option value="self-employed">Self‑employed</option>
+                <option value="student">Student</option>
+                <option value="unemployed">Unemployed</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="employer">Employer / School</label>
+              <input id="employer" name="employer" type="text" maxlength="120" />
+            </div>
+            <div class="field">
+              <label for="monthsAtJob">Months at job</label>
+              <input id="monthsAtJob" name="monthsAtJob" type="number" min="0" step="1" value="0" />
+            </div>
+          </div>
+
+          <h3>Housing history</h3>
+          <div class="grid three">
+            <div class="field">
+              <label for="monthsAtResidence">Months at current residence</label>
+              <input id="monthsAtResidence" name="monthsAtResidence" type="number" min="0" step="1" value="0" />
+            </div>
+            <div class="field">
+              <label for="latePayments">Late payments (last 12 mo.)</label>
+              <input id="latePayments" name="latePayments" type="number" min="0" step="1" value="0" />
+            </div>
+            <div class="field">
+              <label for="references">References (0–3+)</label>
+              <input id="references" name="references" type="number" min="0" max="5" step="1" value="0" />
+            </div>
+          </div>
+
+          <div class="grid two">
+            <div class="field checkbox">
+              <input id="eviction" name="eviction" type="checkbox" />
+              <label for="eviction">Previous eviction on record</label>
+            </div>
+            <div class="field checkbox">
+              <input id="bankruptcy" name="bankruptcy" type="checkbox" />
+              <label for="bankruptcy">Bankruptcy in last 7 years</label>
+            </div>
+          </div>
+
+          <div class="consent">
+            <input id="consent" name="consent" type="checkbox" required />
+            <label for="consent">I have the applicant’s consent to process this information and acknowledge this tool is informational and not a consumer credit report under the FCRA.</label>
+          </div>
+
+          <div class="actions">
+            <button type="submit" class="btn primary">Generate score & report</button>
+            <button type="button" id="resetBtn" class="btn">Clear</button>
+            <div class="score-preview" aria-live="polite">
+              <span>Live score:</span>
+              <strong id="liveScore">—</strong>
+              <span id="liveGrade" class="badge"></span>
+            </div>
+          </div>
+          <p class="hint">Tip: As you type income, rent, and debt, the live score updates.</p>
+        </form>
+      </section>
+
+      <section id="reportSection" class="card report hidden" aria-labelledby="report-title">
+        <h2 id="report-title">Tenant Credit Check Report</h2>
+        <div id="reportMeta" class="report-meta"></div>
+        <div id="scoreSummary" class="score-summary"></div>
+        <div id="scoreBreakdown" class="score-breakdown"></div>
+        <div class="report-actions no-print">
+          <button id="printBtn" class="btn primary">Download / Print PDF</button>
+        </div>
+        <p class="disclaimer">
+          Disclaimer: This score is generated from user‑provided information and is intended as a preliminary screening aid. It is not a consumer credit report and should not be used as the sole basis for approval or denial. Verify all applicant details and comply with applicable housing and credit laws.
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container small">
+        <p>Made for demonstration purposes. No data leaves your browser.</p>
+      </div>
+    </footer>
+
+    <script src="./app.js"></script>
+  </body>
+  </html>

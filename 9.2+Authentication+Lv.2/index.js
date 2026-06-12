@@ -1,0 +1,96 @@
+import express from "express";
+import bodyParser from "body-parser";
+import pg from "pg";
+import bcrypt from "bcrypt";
+
+const app = express();
+const port = 3000;
+const saltRounds = 10;
+
+const db = new pg.Client({
+  user: "postgres",
+  host: "localhost",
+  database: "secrets",
+  password: "ylQQFMl^mrQ8Ls3",
+  port: 5432,
+});
+db.connect();
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static("public"));
+
+app.get("/", (req, res) => {
+  res.render("home.ejs");
+});
+
+app.get("/login", (req, res) => {
+  res.render("login.ejs");
+});
+
+app.get("/register", (req, res) => {
+  res.render("register.ejs");
+});
+
+app.post("/register", async (req, res) => {
+  const email = req.body.username;
+  const password = req.body.password;
+
+  try {
+    const checkResult = await db.query("SELECT * FROM users WHERE email = $1", [
+      email,
+    ]);
+
+    if (checkResult.rows.length > 0) {
+      res.send("Email already exists. Try logging in.");
+      return;
+    } else {
+      // Hash the password before storing
+      const hash = await bcrypt.hash(password, saltRounds);
+      try {
+        await db.query(
+          "INSERT INTO users (email, password) VALUES ($1, $2)",
+          [email, hash]
+        );
+        res.render("secrets.ejs");
+      } catch (dbErr) {
+        console.error("Database insert error:", dbErr);
+        res.status(500).send("Registration failed");
+      }
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Registration failed");
+  }
+});
+
+app.post("/login", async (req, res) => {
+  const email = req.body.username;
+  const password = req.body.password;
+
+  try {
+    const result = await db.query("SELECT * FROM users WHERE email = $1", [
+      email,
+    ]);
+    if (result.rows.length === 0) {
+      return res.send("User not found");
+    }
+
+    const user = result.rows[0];
+    const storedPasswordHash = user.password;
+
+  // Compare provided password to stored bcrypt hash
+  const passwordMatch = await bcrypt.compare(password, storedPasswordHash);
+    if (passwordMatch) {
+      res.render("secrets.ejs");
+    } else {
+      res.send("Incorrect Password");
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Login failed");
+  }
+});
+
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});

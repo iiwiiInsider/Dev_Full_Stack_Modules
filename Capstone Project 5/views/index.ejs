@@ -1,0 +1,79 @@
+<!-- Index view -->
+<section class="search-panel card">
+  <form id="searchForm" class="flex gap" onsubmit="return false" role="search">
+    <input type="search" name="q" id="searchInput" placeholder="Search books (title, author, ISBN)..." autocomplete="off" aria-label="Search books" />
+    <button class="btn" id="searchBtn" type="button">Search</button>
+  </form>
+  <div id="searchResults" class="results-grid" aria-live="polite"></div>
+</section>
+
+<section class="library-controls flex wrap gap-sm">
+  <form method="get" action="/" class="flex gap-sm">
+    <input type="text" name="q" value="<%= query %>" placeholder="Filter in library..." />
+    <select name="status">
+      <option value="">All statuses</option>
+      <option value="unread" <%= status==='unread'?'selected':'' %>>Unread</option>
+      <option value="reading" <%= status==='reading'?'selected':'' %>>Reading</option>
+      <option value="read" <%= status==='read'?'selected':'' %>>Read</option>
+    </select>
+    <select name="sort">
+      <option value="date" <%= sort===''||sort==='date'?'selected':'' %>>Newest</option>
+      <option value="title" <%= sort==='title'?'selected':'' %>>Title</option>
+      <option value="author" <%= sort==='author'?'selected':'' %>>Author</option>
+      <option value="rating" <%= sort==='rating'?'selected':'' %>>Rating</option>
+    </select>
+    <button class="btn btn-secondary">Apply</button>
+  </form>
+</section>
+
+<section class="library-grid">
+  <% if (books.length === 0) { %>
+    <p class="muted">No books saved yet. Search above and add your first book!</p>
+  <% } %>
+  <% books.forEach(b => { %>
+    <article class="book card">
+      <div class="cover">
+        <% if (b.cover_url) { %>
+          <img src="<%= b.cover_url %>" alt="Cover of <%= b.title %>" loading="lazy" />
+        <% } else { %>
+          <div class="cover-placeholder">No Cover</div>
+        <% } %>
+      </div>
+      <div class="meta">
+        <h3><%= b.title %></h3>
+        <p class="author"><%= b.author || 'Unknown Author' %></p>
+        <p class="small muted">
+          <% if (b.published_year) { %> <%= b.published_year %> • <% } %>
+          Added <%= new Date(b.date_added).toLocaleDateString() %>
+        </p>
+  <form method="post" action="/books/<%= b.id %>?_method=PUT" class="book-edit">
+          <label>Status
+            <select name="status">
+              <option value="unread" <%= b.status==='unread'?'selected':'' %>>Unread</option>
+              <option value="reading" <%= b.status==='reading'?'selected':'' %>>Reading</option>
+              <option value="read" <%= b.status==='read'?'selected':'' %>>Read</option>
+            </select>
+          </label>
+          <label>Rating
+            <select name="rating">
+              <option value="">--</option>
+              <% for (let r=1;r<=5;r++){ %>
+                <option value="<%= r %>" <%= b.rating===r?'selected':'' %>><%= r %></option>
+              <% } %>
+            </select>
+          </label>
+          <label>Finished
+            <input type="date" name="date_finished" value="<%= b.date_finished ? b.date_finished.toISOString().slice(0,10) : '' %>">
+          </label>
+          <label>Notes
+            <textarea name="notes" rows="2"><%= b.notes || '' %></textarea>
+          </label>
+          <div class="actions flex gap-sm">
+            <button class="btn btn-small">Save</button>
+            <button formaction="/books/<%= b.id %>?_method=DELETE" formmethod="post" class="btn btn-danger btn-small" onclick="return confirm('Delete this book?')">Delete</button>
+          </div>
+        </form>
+      </div>
+    </article>
+  <% }) %>
+</section>

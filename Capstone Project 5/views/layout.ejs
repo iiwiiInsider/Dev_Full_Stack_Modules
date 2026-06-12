@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book Tracker</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container flex between center">
+      <h1 class="logo"><a href="/">📚 Book Tracker</a></h1>
+      <nav>
+        <a href="/" class="nav-link">Library</a>
+        <button id="themeToggle" class="btn btn-ghost" aria-label="Toggle theme">🌓</button>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+    <% if (typeof error !== 'undefined' && error) { %>
+      <div class="alert error"><strong>Error:</strong> <%= error.message || error %></div>
+    <% } %>
+    <%- body %>
+  </main>
+  <footer class="site-footer">
+    <div class="container small muted">Built with Open Library API • <a href="https://openlibrary.org" target="_blank" rel="noopener">OpenLibrary.org</a></div>
+  </footer>
+  <script src="/js/app.js" defer></script>
+</body>
+</html>

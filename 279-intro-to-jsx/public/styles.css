@@ -1,0 +1,15 @@
+body {
+	margin: 0;
+	background: #121212;
+	color: #e8e8e8;
+}
+
+h1 {
+	font-family: 'McLaren', cursive;
+	font-weight: 400;
+	color: #ffcb6b;
+}
+
+a {
+	color: #82aaff;
+}

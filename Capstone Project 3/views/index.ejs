@@ -1,0 +1,72 @@
+<section class="hero reveal">
+  <h1>Welcome</h1>
+  <p class="muted">Capture your thoughts. Share your stories.</p>
+</section>
+
+<section class="filters reveal">
+  <form class="filters-form" method="get" action="/">
+    <div class="filter-row">
+      <label>
+        Sort
+        <select name="sort">
+          <option value="new" <%= sort === 'new' ? 'selected' : '' %>>Newest</option>
+          <option value="old" <%= sort === 'old' ? 'selected' : '' %>>Oldest</option>
+        </select>
+      </label>
+      <label>
+        Tag
+        <select name="tag">
+          <option value="">All</option>
+          <% (allTags || []).forEach(t => { %>
+            <option value="<%= t %>" <%= tag === t ? 'selected' : '' %>><%= t %></option>
+          <% }) %>
+        </select>
+      </label>
+      <input type="hidden" name="q" value="<%= q || '' %>">
+      <button class="btn" type="submit">Apply</button>
+    </div>
+    <% if (tag) { %>
+      <div class="chips">
+        <a class="chip" href="/?<%= `q=${encodeURIComponent(q||'')}&sort=${encodeURIComponent(sort||'new')}` %>">× <span>Clear tag: <%= tag %></span></a>
+      </div>
+    <% } %>
+  </form>
+</section>
+
+<section class="post-list">
+  <% if (!posts.length) { %>
+    <div class="empty">
+      <p>No posts match your filters.</p>
+      <a class="btn" href="/">Reset filters</a>
+      <a class="btn primary" href="/posts/new">Create Post</a>
+    </div>
+  <% } %>
+
+  <div class="grid">
+    <% posts.forEach(p => { %>
+      <article class="card reveal">
+        <header>
+          <h2 class="card-title"><a href="/posts/<%= p.id %>"><%= p.title %></a></h2>
+          <p class="muted small">
+            <%= readTime(p.body) %> • Updated <time datetime="<%= new Date(p.updatedAt).toISOString() %>"><%= formatDate(p.updatedAt) %></time>
+          </p>
+          <% if (Array.isArray(p.tags) && p.tags.length) { %>
+            <div class="chips">
+              <% p.tags.forEach(t => { %>
+                <a class="chip" href="/?tag=<%= encodeURIComponent(t) %>"><%= t %></a>
+              <% }) %>
+            </div>
+          <% } %>
+        </header>
+        <p><%= summarize(p.body) %></p>
+        <div class="card-actions">
+          <a class="btn" href="/posts/<%= p.id %>">Read</a>
+          <a class="btn" href="/posts/<%= p.id %>/edit">Edit</a>
+          <form action="/posts/<%= p.id %>?_method=DELETE" method="POST" onsubmit="return confirm('Delete this post?');">
+            <button class="btn danger" type="submit">Delete</button>
+          </form>
+        </div>
+      </article>
+    <% }) %>
+  </div>
+</section>

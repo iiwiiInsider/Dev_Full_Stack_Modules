@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="Kyle Blackburn - real estate professional with skills in drone piloting, photography, web development, video editing, and marketing design." />
+        <title>Kyle Blackburn</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+        <link href="./styles.css" rel="stylesheet" />
+    </head>
+    <body class="bg-body text-body d-flex flex-column min-vh-100">
+        <!-- Theme toggle button -->
+        <button id="themeToggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="Toggle color mode" title="Switch to light mode">
+            <i class="bi bi-sun-fill" aria-hidden="true"></i>
+        </button>
+        <header class="py-3">
+            <div class="container">
+                <p class="visually-hidden">Welcome to my personal webpage</p>
+            </div>
+        </header>
+
+        <main>
+            <!-- Hero Section -->
+            <section class="hero py-5 py-lg-6">
+                <div class="container">
+                    <div class="row align-items-center g-4 g-lg-5">
+                        <div class="col-12 col-lg-7 order-2 order-lg-1 text-center text-lg-start">
+                            <h1 class="display-5 fw-bold mb-3">Hi, I'm Kyle Blackburn</h1>
+                            <p class="lead mb-0 maxw-65ch">
+                                I am a standalone sales and rental agent with a real estate background skills in web development. I love building responsive, accessible web applications and continuously learning modern technologies.
+                                <a href="./skills.html" class="ms-1 fw-semibold gradient-text" style="font-size: .95em;">See more</a>
+                            </p>
+                            <nav class="social-grid mt-4" aria-label="Social links">
+                                <a class="social-link" href="https://www.instagram.com/burn.productions_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                                    <i class="bi bi-instagram" aria-hidden="true"></i>
+                                </a>
+                                <a class="social-link" href="https://x.com/Ch4rtsW4tchKyl4" target="_blank" rel="noopener noreferrer" aria-label="X">
+                                    <i class="bi bi-x" aria-hidden="true"></i>
+                                </a>
+                                <a class="social-link" href="https://www.tiktok.com/@blackburnkyle_?_t=ZS-8ynd3Usg5gt&_r=1" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+                                    <i class="bi bi-tiktok" aria-hidden="true"></i>
+                                </a>
+                            </nav>
+
+                        </div>
+                        <div class="col-12 col-lg-5 order-1 order-lg-2 text-center">
+                            <div class="hero-photo">
+                                <img src="./ProfilePhoto.jpg" class="hero-img img-fluid shadow-lg" alt="Portrait of Kyle Blackburn" loading="lazy" decoding="async" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Highlights Section -->
+            <section class="py-5 highlights">
+                <div class="container">
+                    <h2 class="h3 mb-4 text-center text-lg-start">Latest Highlights</h2>
+                    <div class="row g-4">
+                        <div class="col-12 col-lg-8">
+                            <div class="card glass border-0 h-100 reveal">
+                                <div class="card-body">
+                                    <p class="mb-0">
+                                        Hosted a livestream for Cape Town's National German Shepherd Breed Show 2025 that reached 1,000+ international viewers. Received my NQF4 qualification for Real Estate through isikolo in 2025 and I am currently PPRA compliant with a valid FFC as of 2026. I also managed a large portfolio of properties, with a focus on landlord satisfaction and timely transparent communication between parties. Designed this personal site to showcase my work
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-4">
+                            <div class="card glass border-0 h-100 reveal">
+                                <div class="card-body">
+                                    <h3 class="h6 mb-2 text-center text-lg-start">Schedule a time</h3>
+                                    <p class="text-secondary small mb-3">Pick a date you need my skills, and let's get you sorted.</p>
+                                    <form class="d-flex gap-2 align-items-end" onsubmit="return false;" aria-label="Schedule a date">
+                                        <div class="flex-grow-1">
+                                            <label for="scheduleDate" class="form-label small mb-1">Select date</label>
+                                            <input id="scheduleDate" class="form-control" type="date" required />
+                                        </div>
+                                        <div>
+                                            <button id="scheduleSend" type="button" class="btn btn-accent">Email</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+
+        
+        <!-- App Download CTA -->
+        <section class="py-5 app-cta">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-10 col-lg-8">
+                        <div class="text-center mb-3">
+                            <h2 class="h4 mb-2">Get the app</h2>
+                            <p class="text-secondary mb-0">Download my mobile app (currently in testing)</p>
+                        </div>
+                        <div class="store-badges">
+                            <a class="store-badge apple" href="#" target="_blank" rel="noopener noreferrer" aria-label="Download on the App Store">
+                                <i class="bi bi-apple" aria-hidden="true"></i>
+                                <span class="sb-text"><span class="sb-top">Download on the</span><span class="sb-bottom">App Store</span></span>
+                            </a>
+                            <a class="store-badge google" href="#" target="_blank" rel="noopener noreferrer" aria-label="Get it on Google Play">
+                                <i class="bi bi-android2" aria-hidden="true"></i>
+                                <span class="sb-text"><span class="sb-top">Get it on</span><span class="sb-bottom">Google Play</span></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    <footer class="py-4 mt-auto border-top border-secondary-subtle">
+            <div class="container text-center small text-secondary">
+        <p class="mb-0">&copy; <span id="year"></span> Kyle Blackburn</p>
+            </div>
+        </footer>
+
+    <!-- Back to top button -->
+    <button id="backToTop" class="back-to-top" type="button" aria-label="Back to top" title="Back to top">
+        <i class="bi bi-arrow-up" aria-hidden="true"></i>
+    </button>
+
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+                <script>
+                    // Light/Dark theme toggle with persistence (+ system preference default)
+                    (function(){
+                        const root = document.documentElement;
+                        const btn = document.getElementById('themeToggle');
+                        const icon = () => btn.querySelector('i');
+
+                        function setTheme(theme) {
+                            root.setAttribute('data-bs-theme', theme);
+                            try { localStorage.setItem('theme', theme); } catch {}
+                            updateToggle(theme);
+                        }
+
+                        function updateToggle(theme) {
+                            if (!btn) return;
+                            const isLight = theme === 'light';
+                            btn.setAttribute('aria-pressed', String(isLight));
+                            btn.title = isLight ? 'Switch to dark mode' : 'Switch to light mode';
+                            const i = icon();
+                            if (i) {
+                                i.className = isLight ? 'bi bi-moon-stars-fill' : 'bi bi-sun-fill';
+                            }
+                        }
+
+                        // Initialize from storage or current attribute or system preference
+                        const saved = (function(){
+                            try { return localStorage.getItem('theme'); } catch { return null; }
+                        })();
+                        const system = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+                        let theme = saved || root.getAttribute('data-bs-theme') || system;
+
+                        setTheme(theme);
+
+                        if (btn) {
+                            btn.addEventListener('click', () => {
+                                const current = root.getAttribute('data-bs-theme') || 'dark';
+                                setTheme(current === 'dark' ? 'light' : 'dark');
+                            });
+                        }
+                    })();
+                </script>
+                <script>
+                    // Schedule: open mail with selected date in subject
+                    (function(){
+                        const input = document.getElementById('scheduleDate');
+                        const sendBtn = document.getElementById('scheduleSend');
+                        const email = 'kdbburns.social@gmail.com';
+
+                        function openMail(dateStr){
+                            if (!dateStr) return;
+                            const subject = encodeURIComponent(`${dateStr} - SKILLS NEEDED`);
+                            const body = encodeURIComponent(
+                                `Hi Kyle,\n\n` +
+                                `I’d like to schedule work for ${dateStr}.\n\n` +
+                                `Skills needed: {insert skill}\n` +
+                                `Notes: {add any context here}\n\n` +
+                                `Kind regards,\n` +
+                                `{insert name}`
+                            );
+                            const mailto = `mailto:${email}?subject=${subject}&body=${body}`;
+                            window.location.href = mailto;
+                        }
+
+                        if (sendBtn) {
+                            sendBtn.addEventListener('click', () => {
+                                const dateVal = input?.value;
+                                if (!dateVal) {
+                                    // trigger native validation UI if empty
+                                    input?.reportValidity?.();
+                                    return;
+                                }
+                                openMail(dateVal);
+                            });
+                        }
+                    })();
+                </script>
+                <script>
+                    // Back-to-top button, reveal-on-scroll, and hero tilt
+                    (function(){
+                        const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                        // Back to top
+                        const btn = document.getElementById('backToTop');
+                        if (btn) {
+                            const onScroll = () => {
+                                if (window.scrollY > 300) btn.classList.add('show'); else btn.classList.remove('show');
+                            };
+                            window.addEventListener('scroll', onScroll, { passive: true });
+                            onScroll();
+                            btn.addEventListener('click', () => {
+                                if (prefersReduced) { window.scrollTo(0, 0); return; }
+                                window.scrollTo({ top: 0, behavior: 'smooth' });
+                            });
+                        }
+
+                        // Dynamic year
+                        const y = document.getElementById('year');
+                        if (y) y.textContent = new Date().getFullYear();
+
+                        // Reveal-on-scroll
+                        const nodes = Array.from(document.querySelectorAll('.reveal'));
+                        if ('IntersectionObserver' in window) {
+                            const io = new IntersectionObserver((entries, obs) => {
+                                for (const e of entries) {
+                                    if (e.isIntersecting) {
+                                        e.target.classList.add('in');
+                                        obs.unobserve(e.target);
+                                    }
+                                }
+                            }, { threshold: 0.08 });
+                            nodes.forEach(n => io.observe(n));
+                        } else {
+                            nodes.forEach(n => n.classList.add('in'));
+                        }
+
+                        // Hero tilt effect
+                        const photo = document.querySelector('.hero-photo');
+                        if (photo && window.matchMedia('(hover: hover) and (pointer: fine)').matches && !prefersReduced) {
+                            let raf = null;
+                            let tx = 0, ty = 0;
+                            function apply() {
+                                photo.style.transform = `perspective(800px) rotateX(${ty}deg) rotateY(${tx}deg)`;
+                                raf = null;
+                            }
+                            function onMove(e) {
+                                const rect = photo.getBoundingClientRect();
+                                const x = (e.clientX - rect.left) / rect.width; // 0-1
+                                const y = (e.clientY - rect.top) / rect.height; // 0-1
+                                const max = 4; // degrees
+                                tx = (x - 0.5) * max * 2;
+                                ty = -(y - 0.5) * max * 2;
+                                if (!raf) raf = requestAnimationFrame(apply);
+                            }
+                            function reset() {
+                                photo.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg)';
+                            }
+                            photo.addEventListener('mousemove', onMove, { passive: true });
+                            photo.addEventListener('mouseleave', reset);
+                        }
+                    })();
+                </script>
+                <script>
+                    (function(){
+                        const mq = window.matchMedia('(hover: hover) and (pointer: fine)');
+                        if (!mq.matches) return; // desktop-only effect
+                        const root = document.documentElement;
+                        let ticking = false;
+                        let lastX = 0, lastY = 0, dx = 0, dy = 0;
+                        function updateVars(x, y) {
+                            root.style.setProperty('--mx', x + 'px');
+                            root.style.setProperty('--my', y + 'px');
+                            // parallax deltas from center
+                            const cx = window.innerWidth / 2; const cy = window.innerHeight / 2;
+                            dx = x - cx; dy = y - cy;
+                            root.style.setProperty('--dx', dx + 'px');
+                            root.style.setProperty('--dy', dy + 'px');
+                        }
+                        function onMove(e) {
+                            lastX = e.clientX; lastY = e.clientY;
+                            if (!ticking) {
+                                window.requestAnimationFrame(() => {
+                                    updateVars(lastX, lastY);
+                                    ticking = false;
+                                });
+                                ticking = true;
+                            }
+                        }
+                        window.addEventListener('mousemove', onMove, { passive: true });
+                        // Initialize to center
+                        const cx = window.innerWidth / 2; const cy = window.innerHeight / 2;
+                        updateVars(cx, cy);
+                    })();
+                </script>
+    </body>
+</html>

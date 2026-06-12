@@ -1,0 +1,91 @@
+:root {
+  --bg: #0e1013;
+  --card: #171a1f;
+  --muted: #9aa4b2;
+  --text: #e6edf3;
+  --primary: #2bb673;
+  --primary-600: #22965f;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --accent: #60a5fa;
+  --border: #23272f;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+.container { width: min(1100px, 100% - 2rem); margin: 0 auto; }
+.container.small { width: min(900px, 100% - 2rem); }
+
+.site-header { border-bottom: 1px solid var(--border); padding: 1.5rem 0; background: linear-gradient(180deg, #12161c 0%, #0e1013 100%); }
+.site-header h1 { margin: 0 0 .3rem; font-size: 1.8rem; }
+.site-header .subtitle { margin: 0; color: var(--muted); }
+
+.site-footer { border-top: 1px solid var(--border); padding: 1rem 0; color: var(--muted); text-align: center; }
+
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; margin: 1.25rem auto; }
+.card h2 { margin-top: 0; }
+
+.grid { display: grid; gap: 1rem; }
+.grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 800px) { .grid.two, .grid.three { grid-template-columns: 1fr; } }
+
+.field { display: flex; flex-direction: column; gap: .35rem; }
+.field.full { grid-column: 1 / -1; }
+.field label { color: var(--muted); font-weight: 600; }
+.field input, .field select, .field textarea {
+  background: #0f1318;
+  border: 1px solid #272b33;
+  border-radius: 8px;
+  color: var(--text);
+  padding: .6rem .7rem;
+}
+.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(96,165,250,0.2); }
+.field.checkbox { flex-direction: row; align-items: center; gap: .6rem; }
+.field.checkbox input { width: 1.1rem; height: 1.1rem; }
+
+.actions { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; margin-top: .5rem; }
+.btn {
+  appearance: none; border: 1px solid #2c313a; background: #0f1318; color: var(--text);
+  padding: .6rem .9rem; border-radius: 8px; cursor: pointer; font-weight: 600;
+}
+.btn:hover { border-color: var(--accent); }
+.btn.primary { background: var(--primary); border-color: var(--primary-600); }
+.btn.primary:hover { background: var(--primary-600); }
+
+.score-preview { margin-left: auto; display: inline-flex; align-items: center; gap: .4rem; color: var(--muted); }
+.score-preview strong { font-size: 1.2rem; color: var(--text); }
+.badge { background: #243244; color: #b9d6ff; padding: .2rem .5rem; border-radius: 999px; font-size: .85rem; }
+.badge.good { background: #173e2b; color: #8df0bf; }
+.badge.ok { background: #3b2a14; color: #ffd599; }
+.badge.poor { background: #411a1a; color: #ffb3b3; }
+
+.hint { color: var(--muted); margin-top: .2rem; }
+
+.report.hidden { display: none; }
+.report-meta { color: var(--muted); margin-bottom: .6rem; }
+.score-summary { display: flex; align-items: baseline; gap: .75rem; border: 1px solid var(--border); border-radius: 10px; padding: .8rem 1rem; margin-bottom: .8rem; background: #0f1318; }
+.score-summary .value { font-size: 2.2rem; font-weight: 800; }
+.score-summary .grade.badge { font-size: 1rem; }
+.score-breakdown { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; }
+.score-item { background: #0f1318; border: 1px solid var(--border); border-radius: 10px; padding: .7rem .8rem; }
+.score-item h4 { margin: 0 0 .3rem; }
+.score-item p { margin: 0; color: var(--muted); }
+
+.disclaimer { color: var(--muted); font-size: .9rem; margin-top: 1rem; }
+
+/* Print styles */
+@media print {
+  body { background: white; color: black; }
+  .site-header, .site-footer, .no-print, .card form, .hint { display: none !important; }
+  .card.report { border: none; }
+  .score-summary { border-color: #ddd; background: #fff; }
+  .score-item { border-color: #ddd; background: #fff; }
+}

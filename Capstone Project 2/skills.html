@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Professional skills and services offered by Kyle Blackburn." />
+    <title>Skills — Kyle Blackburn</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+    <link href="./styles.css" rel="stylesheet" />
+  </head>
+  <body class="bg-body text-body d-flex flex-column min-vh-100">
+    <!-- Theme toggle button -->
+    <button id="themeToggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="Toggle color mode" title="Switch to light mode">
+      <i class="bi bi-sun-fill" aria-hidden="true"></i>
+    </button>
+    <header class="py-3 border-bottom border-secondary-subtle">
+      <div class="container d-flex align-items-center justify-content-between">
+        <a href="./index.html" class="btn btn-link p-0 text-decoration-none">← Back</a>
+        <h1 class="h4 mb-0">Skills</h1>
+        <span></span>
+      </div>
+    </header>
+
+    <main class="py-5 skills">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-12 col-lg-6">
+            <div class="card glass border-0 h-100 reveal">
+              <div class="card-body">
+                <h2 class="h6 text-secondary text-uppercase mb-2">Web Development</h2>
+                <ul class="skill-chips mb-3">
+                  <li><button type="button" class="skill-pill" data-skill="HTML5">HTML5</button></li>
+                  <li><button type="button" class="skill-pill" data-skill="CSS3">CSS3</button></li>
+                  <li><button type="button" class="skill-pill" data-skill="Bootstrap">Bootstrap</button></li>
+                  <li><button type="button" class="skill-pill" data-skill="Responsive Design">Responsive Design</button></li>
+                  <li><button type="button" class="skill-pill" data-skill="Accessibility">Accessibility</button></li>
+                </ul>
+                <h2 class="h6 text-secondary text-uppercase mb-2">Tools</h2>
+                <ul class="skill-chips">
+                  <li><button type="button" class="skill-pill" data-skill="Git">Git</button></li>
+                  <li><button type="button" class="skill-pill" data-skill="VS Code">VS Code</button></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-lg-6">
+            <div class="card glass border-0 h-100 reveal">
+              <div class="card-body">
+                <h2 class="h6 text-secondary text-uppercase mb-2">Media & Creative</h2>
+                <ul class="skill-chips mb-3">
+                  <li><button type="button" class="skill-pill" data-skill="Photography">Photography</button></li>
+                  <li><button type="button" class="skill-pill" data-skill="Video Editing">Video Editing</button></li>
+                  <li><button type="button" class="skill-pill" data-skill="Drone Piloting">Drone Piloting</button></li>
+                  <li><button type="button" class="skill-pill" data-skill="Marketing Design">Marketing Design</button></li>
+                </ul>
+                <h2 class="h6 text-secondary text-uppercase mb-2">Real Estate & Business</h2>
+                <ul class="skill-chips">
+                  <li><button type="button" class="skill-pill" data-skill="Sales & Rentals">Sales & Rentals</button></li>
+                  <li><button type="button" class="skill-pill" data-skill="Client Relations">Client Relations</button></li>
+                  <li><button type="button" class="skill-pill" data-skill="Property Management">Property Management</button></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row g-4 mt-1">
+          <div class="col-12">
+            <div class="card glass border-0 reveal">
+              <div class="card-body">
+                <h2 class="h6 text-secondary text-uppercase mb-2">Skill details</h2>
+                <div id="skillDetail" class="maxw-65ch">
+                  <p class="mb-0 text-secondary">Select a skill to see what I offer, common deliverables, and the tools I use.</p>
+                </div>
+                <form class="mt-3 d-flex flex-wrap gap-2 align-items-end" onsubmit="return false;" aria-label="Schedule this skill">
+                  <div>
+                    <label for="skillDate" class="form-label small mb-1">Select date</label>
+                    <input id="skillDate" class="form-control" type="date" required />
+                  </div>
+                  <div>
+                    <button id="skillEmail" type="button" class="btn btn-accent">Schedule this skill</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        
+      </div>
+    </main>
+
+    <footer class="py-4 mt-auto border-top border-secondary-subtle">
+      <div class="container text-center small text-secondary">
+        <p class="mb-0">&copy; <span id="year"></span> Kyle Blackburn</p>
+      </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <button id="backToTop" class="back-to-top" type="button" aria-label="Back to top" title="Back to top">
+      <i class="bi bi-arrow-up" aria-hidden="true"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Light/Dark theme toggle with persistence (+ system preference default)
+      (function(){
+        const root = document.documentElement;
+        const btn = document.getElementById('themeToggle');
+        const icon = () => btn?.querySelector('i');
+
+        function setTheme(theme) {
+          root.setAttribute('data-bs-theme', theme);
+          try { localStorage.setItem('theme', theme); } catch {}
+          updateToggle(theme);
+        }
+
+        function updateToggle(theme) {
+          if (!btn) return;
+          const isLight = theme === 'light';
+          btn.setAttribute('aria-pressed', String(isLight));
+          btn.title = isLight ? 'Switch to dark mode' : 'Switch to light mode';
+          const i = icon();
+          if (i) {
+            i.className = isLight ? 'bi bi-moon-stars-fill' : 'bi bi-sun-fill';
+          }
+        }
+
+        const saved = (function(){ try { return localStorage.getItem('theme'); } catch { return null; } })();
+        const system = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        let theme = saved || root.getAttribute('data-bs-theme') || system;
+        setTheme(theme);
+
+        if (btn) {
+          btn.addEventListener('click', () => {
+            const current = root.getAttribute('data-bs-theme') || 'dark';
+            setTheme(current === 'dark' ? 'light' : 'dark');
+          });
+        }
+      })();
+    </script>
+    <script>
+      // Dynamic year and reveal-on-scroll
+      (function(){
+        const y = document.getElementById('year');
+        if (y) y.textContent = new Date().getFullYear();
+
+        const nodes = Array.from(document.querySelectorAll('.reveal'));
+        if ('IntersectionObserver' in window) {
+          const io = new IntersectionObserver((entries, obs) => {
+            for (const e of entries) {
+              if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }
+            }
+          }, { threshold: 0.08 });
+          nodes.forEach(n => io.observe(n));
+        } else {
+          nodes.forEach(n => n.classList.add('in'));
+        }
+      })();
+    </script>
+    <script>
+      // Before/After slider logic (draggable + keyboard)
+      (function(){
+        const slider = document.getElementById('ba1');
+        if (!slider) return;
+        const handle = slider.querySelector('.ba-handle');
+        const after = slider.querySelector('.ba-after');
+        function setPos(px){
+          const rect = slider.getBoundingClientRect();
+          const clamped = Math.max(0, Math.min(px - rect.left, rect.width));
+          const pct = (clamped / rect.width) * 100;
+          slider.style.setProperty('--pos', pct + '%');
+        }
+        function onMove(e){ setPos(e.clientX); }
+        function start(e){
+          e.preventDefault();
+          window.addEventListener('pointermove', onMove, { passive: true });
+          window.addEventListener('pointerup', end, { once: true });
+        }
+        function end(){
+          window.removeEventListener('pointermove', onMove, { passive: true });
+        }
+        handle.addEventListener('pointerdown', start);
+        // Click anywhere in the slider to jump
+        slider.addEventListener('pointerdown', (e)=>{ if(e.target!==handle) setPos(e.clientX); });
+        // Keyboard support
+        handle.addEventListener('keydown', (e)=>{
+          const rect = slider.getBoundingClientRect();
+          const styles = getComputedStyle(slider);
+          const current = parseFloat(styles.getPropertyValue('--pos')) || 50;
+          const stepPct = 2; // 2% per keypress
+          if (e.key === 'ArrowLeft') { slider.style.setProperty('--pos', Math.max(0, current - stepPct) + '%'); }
+          if (e.key === 'ArrowRight') { slider.style.setProperty('--pos', Math.min(100, current + stepPct) + '%'); }
+        });
+        // Initialize center
+        slider.style.setProperty('--pos', '50%');
+      })();
+    </script>
+    <script>
+      // Back-to-top button behavior
+      (function(){
+        const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const btn = document.getElementById('backToTop');
+        if (!btn) return;
+        const threshold = 150; // show sooner on shorter pages
+        const onScroll = () => {
+          if (window.scrollY > threshold) btn.classList.add('show'); else btn.classList.remove('show');
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+        btn.addEventListener('click', () => {
+          if (prefersReduced) { window.scrollTo(0, 0); return; }
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      })();
+    </script>
+    <script>
+      // Skill selection: show detailed explanations
+      (function(){
+        const detail = document.getElementById('skillDetail');
+        if (!detail) return;
+        /** Map skill name to a concise, useful description */
+        const D = {
+          'HTML5': 'Semantic, accessible markup following modern standards (landmarks, ARIA where needed). I structure content for SEO and screen readers, optimize images, and use lazy-loading/decoding hints.',
+          'CSS3': 'Responsive layouts with Flexbox/Grid, theming with CSS variables, motion with prefers-reduced-motion support, and utility-first patterns that play well with Bootstrap.',
+          'Bootstrap': 'Bootstrap 5 components and grid for rapid, consistent UI. I customize via variables and keep overrides minimal for maintainability.',
+          'Responsive Design': 'Mobile-first approach, fluid typography, and thorough testing across common breakpoints.',
+          'Accessibility': 'Color contrast, focus management, keyboard navigation, labels/roles, and semantic HTML to meet WCAG best practices.',
+          'Git': 'Clean commit history, feature branches, code reviews, and conflict resolution. Comfortable with GitHub flows.',
+          'VS Code': 'Efficient workflows with extensions, tasks, formatting, and debugging for web projects.',
+          'Adobe Suite': 'Lightroom and Photoshop for photo correction and asset prep; Premiere Pro for multi-cam timelines, color, and exports.',
+          'MT4': 'MetaTrader 4 trading platform: advanced charting, indicators, order execution, and Expert Advisors (EAs) for automated strategies.',
+          'Photography': 'Property, lifestyle, and event photography. I handle framing, lighting, and post-processing to deliver web-ready assets.',
+          'Video Editing': 'Story-focused cuts, pacing, titles, and sound cleanup. Deliverables optimized for social/web with correct codecs and bitrates.',
+          'Drone Piloting': 'Aerial footage and stills for real estate and events, with an emphasis on safety and local regulations.',
+          'Marketing Design': 'Social posts, flyers, simple brand collateral that aligns with audience and platform best practices.',
+          'Sales & Rentals': 'End-to-end support from valuation and listings to viewings and negotiations, with clear, timely communication.',
+          'Client Relations': 'Proactive updates, expectation setting, and issue resolution to keep projects smooth and clients happy.',
+          'Property Management': 'Maintenance coordination, tenant relations, and documentation to protect property value and experience.'
+        };
+
+        let currentSkill = '';
+        function render(name) {
+          const text = D[name];
+          if (!text) return;
+          detail.innerHTML = `<h3 class="h5 mb-2">${name}</h3><p class="mb-0">${text}</p>`;
+          currentSkill = name;
+        }
+
+        const pills = Array.from(document.querySelectorAll('.skill-pill'));
+        function select(btn){
+          pills.forEach(b => b.setAttribute('aria-pressed', 'false'));
+          btn.setAttribute('aria-pressed', 'true');
+          render(btn.dataset.skill || btn.textContent.trim());
+          // smooth scroll to detail on small screens
+          const card = detail.closest('.card');
+          const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          if (card && window.innerWidth < 992) {
+            const top = card.getBoundingClientRect().top + window.scrollY - 16;
+            window.scrollTo({ top, behavior: prefersReduced ? 'auto' : 'smooth' });
+          }
+        }
+        pills.forEach(btn => {
+          btn.setAttribute('aria-pressed', 'false');
+          btn.addEventListener('click', () => select(btn));
+          btn.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(btn); }
+          });
+        });
+        // Initialize with first available skill
+        if (pills.length) select(pills[0]);
+
+        // Email scheduling for selected skill
+        const emailBtn = document.getElementById('skillEmail');
+        const dateInput = document.getElementById('skillDate');
+        const email = 'kdbburns.social@gmail.com';
+        function schedule(dateStr, skill) {
+          if (!dateStr || !skill) return;
+          const subject = encodeURIComponent(`${dateStr} - ${skill} - SKILLS NEEDED`);
+          const body = encodeURIComponent(
+            `Hi Kyle,\n\n` +
+            `I’d like to schedule ${skill} for ${dateStr}.\n\n` +
+            `Notes: {add any context here}\n\n` +
+            `Kind regards,\n` +
+            `{insert name}`
+          );
+          window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+        }
+        if (emailBtn) {
+          emailBtn.addEventListener('click', () => {
+            if (!dateInput?.value) { dateInput?.reportValidity?.(); return; }
+            schedule(dateInput.value, currentSkill || 'Selected skill');
+          });
+        }
+      })();
+    </script>
+    <script>
+      // Cursor parallax variables for geometric background (match index)
+      (function(){
+        const mq = window.matchMedia('(hover: hover) and (pointer: fine)');
+        if (!mq.matches) return;
+        const root = document.documentElement;
+        let ticking = false, lastX = 0, lastY = 0;
+        function updateVars(x, y) {
+          root.style.setProperty('--mx', x + 'px');
+          root.style.setProperty('--my', y + 'px');
+          const cx = window.innerWidth / 2, cy = window.innerHeight / 2;
+          root.style.setProperty('--dx', (x - cx) + 'px');
+          root.style.setProperty('--dy', (y - cy) + 'px');
+        }
+        function onMove(e) {
+          lastX = e.clientX; lastY = e.clientY;
+          if (!ticking) {
+            requestAnimationFrame(() => { updateVars(lastX, lastY); ticking = false; });
+            ticking = true;
+          }
+        }
+        window.addEventListener('mousemove', onMove, { passive: true });
+        updateVars(window.innerWidth/2, window.innerHeight/2);
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+<%- include('partials/head', { title, authed: false }) %>
+<section class="hero small">
+  <div class="hero-inner">
+    <h1>Configure Microsoft Sign-in</h1>
+    <p>It looks like your Azure credentials are missing. Add them to your <code>.env</code> file and restart the server.</p>
+    <div class="panel" style="text-align:left; max-width: 780px; margin: 1rem auto;">
+      <ol>
+        <li>Go to Azure Portal → App registrations → New registration</li>
+        <li>Accounts: choose your preference; Redirect URI (web): <code>http://localhost:3000/auth/callback</code></li>
+        <li>After creating the app: Certificates & secrets → New client secret</li>
+        <li>API permissions → Add a permission → Microsoft Graph → Delegated → <code>offline_access</code>, <code>Files.Read</code> (and optionally <code>Files.Read.All</code>, <code>Files.ReadWrite</code>)</li>
+      </ol>
+      <pre><code>AZURE_TENANT=&lt;common or your tenant id&gt;
+AZURE_CLIENT_ID=&lt;app (client) id&gt;
+AZURE_CLIENT_SECRET=&lt;client secret value&gt;
+AZURE_REDIRECT_URI=http://localhost:3000/auth/callback
+AZURE_SCOPES=offline_access Files.Read Files.Read.All Files.ReadWrite</code></pre>
+      <p>Current config status:</p>
+      <ul>
+        <li>Tenant: <code><%= config.tenant %></code></li>
+        <li>Client ID set: <strong><%= config.clientId %></strong></li>
+        <li>Client Secret set: <strong><%= config.clientSecret %></strong></li>
+        <li>Redirect URI: <code><%= config.redirectUri %></code></li>
+        <li>Scopes: <code><%= config.scopes %></code></li>
+      </ul>
+    </div>
+  </div>
+</section>
+<%- include('partials/foot') %>
