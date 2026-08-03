@@ -6,11 +6,11 @@ const app = express();
 const port = 3000;
 
 const db = new pg.Client({
-  user: "postgres",
-  host: "localhost",
-  database: "secrets",
-  password: "ylQQFMl^mrQ8Ls3",
-  port: 5432,
+  user: process.env.PG_USER || "postgres",
+  host: process.env.PG_HOST || "localhost",
+  database: process.env.PG_DATABASE || "secrets",
+  password: process.env.PG_PASSWORD || "",
+  port: process.env.PG_PORT || 5432,
 });
 db.connect().catch((err) => {
   console.error("Failed to connect to database 'secrets':", err.code, err.message);

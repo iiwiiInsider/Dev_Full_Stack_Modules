@@ -3,11 +3,11 @@ import bodyParser from "body-parser";
 import pg from "pg";
 
 const db = new pg.Client({
-  user: "postgres",
-  host: "localhost",
-  database: "world",
-  password: "ylQQFMl^mrQ8Ls3",
-  port: 5432,
+  user: process.env.PG_USER || "postgres",
+  host: process.env.PG_HOST || "localhost",
+  database: process.env.PG_DATABASE || "world",
+  password: process.env.PG_PASSWORD || "",
+  port: process.env.PG_PORT || 5432,
 });
 
 const app = express();

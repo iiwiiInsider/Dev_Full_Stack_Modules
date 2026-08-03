@@ -5,11 +5,11 @@ const app = express();
 const port = 3000;
 const API_URL = "https://secrets-api.appbrewery.com";
 
-// TODO: Replace the values below with your own before running this file.
-const yourUsername = "Kyle";
-const yourPassword = "GoGo1234";
-const yourAPIKey = "db4a73ff-96fd-47a0-ab96-29b7eff80277";
-const yourBearerToken = "db4a73ff-96fd-47a0-ab96-29b7eff80277";
+// Use environment variables for sensitive data
+const yourUsername = process.env.API_USERNAME || "";
+const yourPassword = process.env.API_PASSWORD || "";
+const yourAPIKey = process.env.API_KEY || "";
+const yourBearerToken = process.env.BEARER_TOKEN || "";
 
 app.get("/", (req, res) => {
   res.render("index.ejs", { content: "API Response." });
