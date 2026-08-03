@@ -244,7 +244,15 @@
         function render(name) {
           const text = D[name];
           if (!text) return;
-          detail.innerHTML = `<h3 class="h5 mb-2">${name}</h3><p class="mb-0">${text}</p>`;
+          const heading = document.createElement('h3');
+          heading.className = 'h5 mb-2';
+          heading.textContent = name;
+
+          const paragraph = document.createElement('p');
+          paragraph.className = 'mb-0';
+          paragraph.textContent = text;
+
+          detail.replaceChildren(heading, paragraph);
           currentSkill = name;
         }
 
